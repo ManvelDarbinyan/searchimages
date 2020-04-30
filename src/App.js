@@ -1,26 +1,43 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import ImageSearch from "./ImageSearch/ImageSearch";
+import ImageList from "./ImageList/ImageList";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const API_KEY = "16296689-917dbd73c3a5f7317f4966f47";
+
+class App extends React.Component {
+  state = {
+    images: [],
+    error: null,
+  };
+
+  handleGetRequest = async (e) => {
+    e.preventDefault();
+    const searchItem = e.target.elements.searchValue.value;
+    e.target.reset();
+    const url = `https://pixabay.com/api/?key=${API_KEY}&q=${searchItem}&image_type=photo`;
+    const request = await fetch(url);
+    const response = await request.json();
+
+    if (!searchItem) {
+      this.setState({ error: "Please provide a value" });
+    } else {
+      this.setState({ images: response.hits, error: null });
+    }
+  };
+
+  render() {
+    return (
+      <div>
+        <ImageSearch handleGetRequest={this.handleGetRequest} />
+        {this.state.error !== null ? (
+          <div style={{ color: "#fff", textAlign: "center" }}>
+            {this.state.error}
+          </div>
+        ) : (
+          <ImageList images={this.state.images} />
+        )}
+      </div>
+    );
+  }
 }
-
 export default App;

@@ -1,0 +1,42 @@
+.imageViewContainer {
+  width: 100%;
+  text-align: center;
+  color: #fff;
+}
+
+.imageViewImg {
+  height: 530px;
+  width: auto;
+}
+
+.imageViewCopyright {
+  color: #8f8f8f;
+}
+
+.imageViewText {
+  margin-top: 1rem;
+}
+
+.imageViewText h4,
+h5,
+span {
+  letter-spacing: 1px;
+  color: #f39c12;
+}
+
+.imageViewText h4 span {
+  font-weight: bold;
+  color: #c0392b;
+}
+
+.imageViewText a {
+  font-weight: bold;
+  color: #c0392b;
+}
+
+.imageViewText button {
+  border: 0;
+  background: transparent;
+  border: solid 2px #34495e;
+  margin-top: 10px;
+}
